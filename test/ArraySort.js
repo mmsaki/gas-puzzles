@@ -16,9 +16,7 @@ const logGasUsage = (currentGasUsage) => {
     console.log(`           Current gas use:   ${currentGasUsage}`);
     console.log(`           The gas target is: ${TARGET_GAS_PRICE}`);
     if (diff < 0) {
-        console.log(
-            `           You are \x1b[31m${diff * -1}\x1b[0m above the target`
-        );
+        console.log(`           You are \x1b[31m${diff * -1}\x1b[0m above the target`);
     }
 };
 
@@ -26,9 +24,7 @@ describe('ArraySort', async function () {
     let instance;
 
     beforeEach(async () => {
-        const ContractFactory = await ethers.getContractFactory(
-            'OptimizedArraySort'
-        );
+        const ContractFactory = await ethers.getContractFactory('OptimizedArraySort');
         instance = await ContractFactory.deploy();
 
         await instance.deployed();
@@ -38,16 +34,14 @@ describe('ArraySort', async function () {
         it('The functions MUST remain non-payable', async function () {
             let error;
             try {
-                await instance.sortArray(PRE_SORTED_ARRAY,{
+                await instance.sortArray(PRE_SORTED_ARRAY, {
                     value: ethers.utils.parseEther('1.00'),
                 });
             } catch (e) {
                 error = e;
             }
 
-            expect(error.reason).to.equal(
-                'non-payable method cannot override value'
-            );
+            expect(error.reason).to.equal('non-payable method cannot override value');
 
             expect(error.code).to.equal('UNSUPPORTED_OPERATION');
             expect(instance.sortArray(PRE_SORTED_ARRAY)).to.not.be.rejected;
@@ -74,7 +68,7 @@ describe('ArraySort', async function () {
             const sortedArray = await instance.sortArray(REVERSE_SORTED_ARRAY);
             expect(sortedArray.toString()).to.equal(SORTED_ARRAY_STR);
         });
-        
+
         it('The functions MUST perform as expected', async function () {
             const sortedArray = await instance.sortArray(UNSORTED_ARRAY);
             expect(sortedArray.toString()).to.equal(SORTED_ARRAY_STR);

@@ -13,9 +13,7 @@ const logGasUsage = (currentGasUsage) => {
     console.log(`           Current gas use:   ${currentGasUsage}`);
     console.log(`           The gas target is: ${TARGET_GAS_PRICE}`);
     if (diff < 0) {
-        console.log(
-            `           You are \x1b[31m${diff * -1}\x1b[0m above the target`
-        );
+        console.log(`           You are \x1b[31m${diff * -1}\x1b[0m above the target`);
     }
 };
 
@@ -23,9 +21,7 @@ describe('ArraySum', async function () {
     let instance;
 
     beforeEach(async () => {
-        const ContractFactory = await ethers.getContractFactory(
-            'OptimizedArraySum'
-        );
+        const ContractFactory = await ethers.getContractFactory('OptimizedArraySum');
         instance = await ContractFactory.deploy();
 
         await instance.deployed();
@@ -42,9 +38,7 @@ describe('ArraySum', async function () {
                 error = e;
             }
 
-            expect(error.reason).to.equal(
-                'non-payable method cannot override value'
-            );
+            expect(error.reason).to.equal('non-payable method cannot override value');
             expect(error.code).to.equal('UNSUPPORTED_OPERATION');
             expect(instance.getArraySum()).to.not.be.rejected;
         });
@@ -65,9 +59,7 @@ describe('ArraySum', async function () {
             await instance.setArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
             expect(await instance.getArraySum()).to.equal(45);
 
-            await instance.setArray([
-                100, 200, 300, 400, 500, 600, 700, 800, 900,
-            ]);
+            await instance.setArray([100, 200, 300, 400, 500, 600, 700, 800, 900]);
             expect(await instance.getArraySum()).to.equal(4500);
         });
 

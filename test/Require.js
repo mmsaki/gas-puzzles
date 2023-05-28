@@ -13,9 +13,7 @@ const logGasUsage = (currentGasUsage) => {
     console.log(`           Current gas use:   ${currentGasUsage}`);
     console.log(`           The gas target is: ${TARGET_GAS_PRICE}`);
     if (diff < 0) {
-        console.log(
-            `           You are \x1b[31m${diff * -1}\x1b[0m above the target`
-        );
+        console.log(`           You are \x1b[31m${diff * -1}\x1b[0m above the target`);
     }
 };
 
@@ -23,9 +21,7 @@ describe('Require', async function () {
     let instance;
 
     beforeEach(async () => {
-        const ContractFactory = await ethers.getContractFactory(
-            'OptimizedRequire'
-        );
+        const ContractFactory = await ethers.getContractFactory('OptimizedRequire');
         instance = await ContractFactory.deploy();
 
         await instance.deployed();

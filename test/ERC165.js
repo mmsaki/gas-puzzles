@@ -1,7 +1,4 @@
-const {
-    time,
-    loadFixture,
-} = require('@nomicfoundation/hardhat-network-helpers');
+const { time, loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { anyValue } = require('@nomicfoundation/hardhat-chai-matchers/withArgs');
 const { expect } = require('chai');
 const { ethers } = require('hardhat');
@@ -52,16 +49,12 @@ describe('ERC165Challenge', function () {
     });
 
     this.afterEach(async function () {
-        expect(await this.award.ownerOf(1337)).to.be.equal(
-            this.attacker.address
-        );
+        expect(await this.award.ownerOf(1337)).to.be.equal(this.attacker.address);
     });
 
     this.afterAll(async function () {
         const limitUsed = await this.victim.GAS_LIMIT();
-        const numTxns = await ethers.provider.getTransactionCount(
-            attacker.address
-        );
+        const numTxns = await ethers.provider.getTransactionCount(attacker.address);
         console.log(`\nGas limit used: ${limitUsed}`);
         console.log(`Number of Transactions: ${numTxns}`);
     });
